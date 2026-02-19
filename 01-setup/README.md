@@ -1,8 +1,8 @@
-# 🚀 Jenkins Phase 0 — Setup & Foundation (CI/CD Platform Bootstrapping)
+# 🚀 Jenkins Phase 0 - Setup & Foundation (CI/CD Platform Bootstrapping)
 
 Welcome to **Jenkins Phase 0**, where the focus is on building a strong foundation for CI/CD by installing, configuring, and validating Jenkins in a production‑style environment.
 
-This phase emphasizes **hands‑on setup**, **operational understanding**, and **platform thinking** — ensuring Jenkins is ready for pipelines, automation workflows, and real‑world CI/CD scenarios.
+This phase emphasizes **hands‑on setup**, **operational understanding**, and **platform thinking** - ensuring Jenkins is ready for pipelines, automation workflows, and real‑world CI/CD scenarios.
 
 ---
 
@@ -38,38 +38,38 @@ Jenkins follows a **controller‑agent architecture**:
 
 ---
 
-## 🐳 Step 1 — Run Jenkins Using Docker
+## 🐳 Step 1 - Run Jenkins Using Docker
 
 Pull Jenkins LTS image:
 
 ```bash
 docker pull jenkins/jenkins:lts
 ```
+<img width="805" height="541" alt="image" src="https://github.com/user-attachments/assets/726aa669-0733-436f-b4fb-f54ac913fcaf" />   
 
 Run container with persistent volume:
 
 ```bash
-docker run -d \
-  --name jenkins \
-  -p 8080:8080 \
-  -p 50000:50000 \
-  -v jenkins_home:/var/jenkins_home \
-  jenkins/jenkins:lts
+docker run -d --name jenkins -p 8181:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 ```
-
+**Note:** my host machine 8080 port is already occupied hence I am using 8181 port   
+</br>
 Verify container:
 
 ```bash
 docker ps
 ```
+<img width="1200" height="81" alt="image" src="https://github.com/user-attachments/assets/c485d238-0f4c-472f-b6ff-52d54462df61" />   
 
 ---
 
-## 🔐 Step 2 — Unlock Jenkins
+## 🔐 Step 2 - Unlock Jenkins
 
 Open:
 
-👉 http://localhost:8080
+👉 http://localhost:8181   
+</br>
+<img width="921" height="441" alt="image" src="https://github.com/user-attachments/assets/797800ae-7a8a-4ee5-9aca-1eca61e925e9" />
 
 Retrieve admin password:
 
@@ -81,7 +81,7 @@ Paste into UI.
 
 ---
 
-## 🔌 Step 3 — Install Suggested Plugins
+## 🔌 Step 3 - Install Suggested Plugins
 
 Install recommended plugins including:
 
@@ -95,13 +95,16 @@ These enable CI/CD workflows.
 
 ---
 
-## 👤 Step 4 — Create Admin User
+## 👤 Step 4 - Create Admin User
 
-Create secure admin credentials for Jenkins management.
+Create secure admin credentials for Jenkins management.    
+
+<img width="921" height="741" alt="image" src="https://github.com/user-attachments/assets/4e11f79c-07c2-4fe0-9f49-b4c819fa38aa" />   
+<img width="921" height="323" alt="image" src="https://github.com/user-attachments/assets/5bdf78d4-63e9-465e-9b8c-ddb64fae1b80" />
 
 ---
 
-## 🧪 Step 5 — Validate Jenkins (Smoke Test)
+## 🧪 Step 5 - Validate Jenkins (Smoke Test)
 
 Create a Freestyle Job:
 
@@ -110,6 +113,9 @@ Build step:
 ```bash
 echo "Jenkins is working"
 ```
+</br>
+<img width="901" height="292" alt="image" src="https://github.com/user-attachments/assets/bc9f18a2-b8ab-4cfe-9b5b-1c28cccecb9f" />
+<img width="953" height="227" alt="image" src="https://github.com/user-attachments/assets/82c4c06c-29a8-4ae0-bd88-bd465fd2f4c1" />
 
 Confirm successful build.
 
@@ -133,25 +139,6 @@ Includes:
 
 ---
 
-## 🖼 Screenshots Section
-
-📸 Add evidence of hands‑on:
-
-- Jenkins dashboard
-- Plugin installation
-- Unlock screen
-- Successful build output
-- Manage Jenkins page
-
-Example:
-
-```
-screenshots/dashboard.png
-screenshots/build-success.png
-```
-
----
-
 ## 🔄 Persistence Validation
 
 Restart container:
@@ -166,6 +153,12 @@ Verify:
 ✅ Jobs still exist  
 ✅ Configuration preserved  
 
+<img width="249" height="43" alt="image" src="https://github.com/user-attachments/assets/c40caa69-d2be-40cd-ab5e-b43a594d3893" /> </br>
+
+<img width="249" height="43" alt="image" src="https://github.com/user-attachments/assets/91a969bf-c1cb-4fdb-8801-4c876ab829c9" /> </br>
+
+<img width="1264" height="393" alt="image" src="https://github.com/user-attachments/assets/fa253636-8c19-460a-8a1d-3d5bc2319f59" />
+
 ---
 
 ## 🛠 Troubleshooting Notes
@@ -178,12 +171,12 @@ Common issues:
 
 ---
 
-## 📚 Lessons Learned (Fill During Hands‑On)
+## 📚 Lessons Learned
 
-- ____________________________________
-- ____________________________________
-- ____________________________________
-- ____________________________________
+- CI/CD reliability starts with a stable Jenkins foundation.
+- Poor setup leads to pipeline instability later.
+- Documentation and validation are part of platform engineering, not optional tasks.
+- Even local setups should follow production thinking (security, persistence, reproducibility).
 
 ---
 
@@ -203,19 +196,6 @@ Common issues:
 - Secure credentials properly
 - Monitor Jenkins resource usage
 - Keep plugins updated
-
----
-
-## ✔ Phase Completion Checklist
-
-- [ ] Jenkins container running
-- [ ] UI accessible
-- [ ] Plugins installed
-- [ ] Admin user created
-- [ ] Test job successful
-- [ ] Persistence verified
-- [ ] Screenshots added
-- [ ] Notes documented
 
 ---
 
@@ -240,4 +220,7 @@ Phase 1 will dive into:
 
 ---
 
+## ✍️ Author
+
+**[Himanshu Kumar](https://www.linkedin.com/in/h1manshu-kumar/)** - Learning by building, documenting, and sharing 🚀
 
