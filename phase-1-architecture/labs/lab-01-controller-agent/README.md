@@ -1,4 +1,4 @@
-# 🧪 Lab 01 — Jenkins Controller + Agent Setup
+# 🧪 Lab 01 - Jenkins Controller + Agent Setup
 
 > Learn how Jenkins distributes builds across nodes and why production setups never run workloads on the controller.
 
@@ -53,7 +53,7 @@ Controller schedules → Agent runs.
 
 ---
 
-## 🚀 Step 1 — Run Jenkins Controller
+## 🚀 Step 1 - Run Jenkins Controller
 
 Pull Jenkins image:
 
@@ -64,12 +64,12 @@ docker pull jenkins/jenkins:lts
 Run container:
 
 ```bash
-docker run -d   --name jenkins-controller   -p 8080:8080   -p 50000:50000   -v jenkins_home:/var/jenkins_home   jenkins/jenkins:lts
+docker run -d   --name jenkins-controller   -p 8181:8080   -p 50000:50000   -v jenkins_home:/var/jenkins_home   jenkins/jenkins:lts
 ```
 
 ---
 
-## 🔎 Step 2 — Unlock Jenkins
+## 🔎 Step 2 - Unlock Jenkins
 
 Get admin password:
 
@@ -79,7 +79,7 @@ docker exec jenkins-controller cat /var/jenkins_home/secrets/initialAdminPasswor
 
 Open:
 
-http://localhost:8080
+http://localhost:8181
 
 Install suggested plugins.
 
@@ -87,7 +87,7 @@ Create admin user.
 
 ---
 
-## ⚙️ Step 3 — Configure Agent in Jenkins
+## ⚙️ Step 3 - Configure Agent in Jenkins
 
 Go to:
 
@@ -105,23 +105,26 @@ Configure:
 - Labels: docker
 - Launch method: Launch agent via JNLP
 
-Save.
+Save.   
+
+<img width="1264" height="377" alt="image" src="https://github.com/user-attachments/assets/71f38d1e-9a6c-4873-8e9e-e2df537dc0ff" />
 
 ---
 
-## 🧱 Step 4 — Run Agent Container
+## 🧱 Step 4 - Run Agent Container
 
 Run agent:
 
 ```bash
-docker run -d   --name jenkins-agent   -e JENKINS_URL=http://host.docker.internal:8080   -e JENKINS_AGENT_NAME=docker-agent   -e JENKINS_SECRET=<SECRET_FROM_JENKINS>   jenkins/inbound-agent
+docker run -d --name jenkins-agent --network host jenkins/inbound-agent -url http://localhost:8181 -secret <JENKINS_AGENT_SECRET> -name docker-agent -workDir=/home/jenkins/agent
+
 ```
 
 Get secret from node configuration page.
 
 ---
 
-## ✅ Step 5 — Verify Agent Connection
+## ✅ Step 5 - Verify Agent Connection
 
 In Jenkins UI:
 
@@ -129,11 +132,13 @@ Manage Nodes → docker-agent
 
 Status should show:
 
-✅ Connected
+✅ Connected   
+
+<img width="1264" height="377" alt="image" src="https://github.com/user-attachments/assets/800b79ed-529f-443d-b42e-abbd69f2d90b" />
 
 ---
 
-## 🧪 Step 6 — Create Test Pipeline
+## 🧪 Step 6 - Create Test Pipeline
 
 Create pipeline job:
 
@@ -166,10 +171,12 @@ Run build.
 - Console shows agent hostname
 - Workspace created on agent
 - Executor usage visible
+</br>
+<img width="953" height="477" alt="image" src="https://github.com/user-attachments/assets/1f7c84fa-393c-405f-85dd-0d14e417ebcf" />
 
 ---
 
-## 🧪 Step 7 — Observe Queue Behavior
+## 🧪 Step 7 - Observe Queue Behavior
 
 Trigger multiple builds quickly.
 
@@ -271,7 +278,6 @@ Static agents are rarely used at scale.
 
 ## 🎓 Interview Talking Points
 
-Be ready to explain:
 
 - Why controller should not run builds
 - How Jenkins schedules builds
@@ -285,24 +291,17 @@ Strong answer example:
 
 ---
 
-## 🧩 GitHub Evidence To Add
-
-Include:
-
-- Agent connection screenshot
-- Build console logs
-- Node configuration
-- Queue view
-
-This proves hands-on experience.
-
----
-
 ## 📌 Lessons Learned (Fill After Lab)
-
-- …
-- …
-- …
+- Jenkins controller schedules builds while agents execute workloads.
+- Running builds on the controller can cause performance and stability issues.
+- Agents authenticate using a secret token to ensure secure connections.
+- Labels control where pipelines run and help route workloads.
+- Build queue behavior depends on executor availability.
+- If an agent goes offline, builds remain queued until capacity returns.
+- Workspaces are created on agents and persist between builds unless cleaned.
+- Logs from both controller and agent are critical for debugging connectivity issues.
+- Distributed builds improve scalability and isolate failures.
+- Understanding node configuration is essential for troubleshooting CI problems.
 
 ---
 
@@ -316,15 +315,11 @@ Try:
 
 ---
 
-## 🏁 Lab Completion Checklist
-
-- [ ] Controller running
-- [ ] Agent connected
-- [ ] Pipeline executed on agent
-- [ ] Failure scenario tested
-- [ ] Observations documented
+> Mastering distributed builds is the first step toward designing scalable CI systems.
 
 ---
 
-> Mastering distributed builds is the first step toward designing scalable CI systems.
+## ✍️ Author
+
+**[Himanshu Kumar](https://www.linkedin.com/in/h1manshu-kumar/)** - Learning by building, documenting, and sharing 🚀
 
