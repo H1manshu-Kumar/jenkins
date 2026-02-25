@@ -1,4 +1,4 @@
-# 🚀 Jenkins Phase 1 — Architecture Deep Dive
+# 🚀 Jenkins Phase 1 - Architecture Deep Dive
 
 > Building a strong operational understanding of Jenkins internals, distributed builds, pipeline execution, and production reliability.
 
