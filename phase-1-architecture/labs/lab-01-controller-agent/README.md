@@ -291,7 +291,7 @@ Strong answer example:
 
 ---
 
-## 📌 Lessons Learned (Fill After Lab)
+## 📌 Lessons Learned
 - Jenkins controller schedules builds while agents execute workloads.
 - Running builds on the controller can cause performance and stability issues.
 - Agents authenticate using a secret token to ensure secure connections.
