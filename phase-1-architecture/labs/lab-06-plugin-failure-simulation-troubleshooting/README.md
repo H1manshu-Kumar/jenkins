@@ -44,7 +44,7 @@ Plugin Installed → Pipeline Uses Feature → Conflict Occurs → Build Fails
 
 ---
 
-## 🚀 Step 1 — Install Plugin
+## 🚀 Step 1 - Install Plugin
 
 Go to:
 
@@ -52,13 +52,18 @@ Manage Jenkins → Plugins → Available
 
 Install:
 
-- Workspace Cleanup Plugin
+- Distrubuted workspace Cleanup
 
 Restart Jenkins if required.
 
 ---
 
-## 🧪 Step 2 — Modify Pipeline
+## 🧪 Step 2 - Create new Plugin Pipeline
+Create new pipeline:
+
+lab06-plugin-failure-simulation
+
+Add:
 
 Update pipeline:
 
@@ -76,26 +81,31 @@ pipeline {
 }
 ```
 
-Run build.
+Run build.   
+
+<img width="954" height="44" alt="image" src="https://github.com/user-attachments/assets/c74ecf3a-f998-417c-85d6-ab819d8131fd" />
 
 ---
 
-## 🔍 Step 3 — Observe Behavior
+## 🔍 Step 3 - Observe Behavior
 
 Notice:
 
 - Workspace cleaned
 - Plugin functionality used
+<img width="994" height="219" alt="image" src="https://github.com/user-attachments/assets/96e6ee80-3e94-4c13-9fc6-50ff8e2653b0" />
 
 ---
 
-## 🔥 Step 4 — Disable Plugin
+## 🔥 Step 4 - Disable Plugin
 
 Go to:
 
 Manage Jenkins → Plugins → Installed
 
-Disable the plugin.
+Disable the plugin.    
+
+<img width="961" height="126" alt="image" src="https://github.com/user-attachments/assets/b7145b9a-ffe7-44e4-86fd-3c5e5accfef8" />
 
 Run pipeline again.
 
@@ -158,38 +168,35 @@ Strong answer:
 
 ---
 
-## 🧩 Evidence To Add
+## 📌 Lessons Learned
 
-- Plugin install screenshot
-- Failure logs
-- Pipeline success vs failure
-
----
-
-## 📌 Lessons Learned (Fill After Lab)
-
-- …
-- …
-- …
-
----
-
-## 🚀 Stretch Exercise
-
-Try:
-
-Install conflicting plugin.
+* Jenkins plugins extend core functionality.
+* Pipelines may depend on plugin features.
+* Disabling required plugins causes build failures.
+* Plugin versions can impact compatibility.
+* Outdated plugins may introduce instability.
+* Missing plugins break pipeline execution.
+* Plugin lifecycle must be managed carefully.
+* Jenkins stability depends on plugin health.
+* Troubleshooting often requires checking plugins.
+* Controlled plugin usage improves CI reliability.
 
 ---
 
 ## 🏁 Lab Completion Checklist
 
-- [ ] Plugin installed
-- [ ] Pipeline tested
-- [ ] Plugin disabled
-- [ ] Failure observed
+- [x] Plugin installed
+- [x] Pipeline tested
+- [x] Plugin disabled
+- [x] Failure observed
 
 ---
 
 > Plugin management is essential for Jenkins stability.
+
+---
+
+## ✍️ Author
+
+**[Himanshu Kumar](https://www.linkedin.com/in/h1manshu-kumar/)** - Learning by building, documenting, and sharing 🚀 
 
