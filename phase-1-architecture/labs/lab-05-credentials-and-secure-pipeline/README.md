@@ -1,4 +1,4 @@
-# 🧪 Lab 05 — Credentials & Secure Pipelines
+# 🧪 Lab 05 - Credentials & Secure Pipelines
 
 > Learn how Jenkins securely manages secrets and how to prevent sensitive data exposure in pipelines.
 
@@ -44,7 +44,7 @@ Jenkins Credentials Store → Pipeline → Secure Injection → Masked Logs
 
 ---
 
-## 🚀 Step 1 — Add Credential
+## 🚀 Step 1 - Add Credential
 
 Go to:
 
@@ -56,11 +56,13 @@ Add:
 - ID: demo-secret
 - Secret: super-secret-value
 
-Save.
+Save.   
+
+<img width="1153" height="161" alt="image" src="https://github.com/user-attachments/assets/638e39c7-c200-45d9-a0cc-b3e6e8828976" />
 
 ---
 
-## 🧪 Step 2 — Create Secure Pipeline
+## 🧪 Step 2 - Create Secure Pipeline
 
 Create new pipeline:
 
@@ -83,10 +85,11 @@ pipeline {
     }
 }
 ```
+<img width="961" height="42" alt="image" src="https://github.com/user-attachments/assets/5886646a-fd1b-4d79-a4a1-dcf621a6c694" />
 
 ---
 
-## ▶️ Step 3 — Run Build
+## ▶️ Step 3 - Run Build
 
 Click **Build Now**
 
@@ -94,10 +97,12 @@ Observe:
 
 - Secret not printed
 - Logs remain masked
+  
+<img width="979" height="461" alt="image" src="https://github.com/user-attachments/assets/bb3f5c60-66fe-4a65-ad72-072efd0f28c1" />
 
 ---
 
-## 🔍 Step 4 — Attempt Unsafe Usage
+## 🔍 Step 4 - Attempt Unsafe Usage
 
 Modify pipeline:
 
@@ -109,21 +114,25 @@ Run build.
 
 Observe:
 
-Secret is masked.
+Secret is masked.   
+
+<img width="979" height="513" alt="image" src="https://github.com/user-attachments/assets/dd08910a-3477-4ffa-9f2a-c1a234ddfb2c" />
 
 ---
 
-## 🔥 Step 5 — Hardcode Secret (Anti-pattern)
+## 🔥 Step 5 - Hardcode Secret (Anti-pattern)
 
 Test:
 
 ```groovy
-sh 'echo super-secret-value'
+sh 'echo Secret in plain text format'
 ```
 
 Observe:
 
-Not masked — insecure.
+Not masked - insecure.   
+
+<img width="976" height="633" alt="image" src="https://github.com/user-attachments/assets/3cb31f0c-fbea-464b-b75e-ab44ea41124e" />
 
 ---
 
@@ -150,7 +159,12 @@ Use wrong credential ID.
 
 Observe:
 
-Pipeline fails.
+Pipeline fails.   
+
+<img width="992" height="313" alt="image" src="https://github.com/user-attachments/assets/83333f21-5802-493f-b200-845218b7f7b5" />
+</br>
+
+<img width="976" height="371" alt="image" src="https://github.com/user-attachments/assets/7e388281-a8a8-491a-adeb-87690e1bcb93" />
 
 ---
 
@@ -179,38 +193,35 @@ Strong answer:
 
 ---
 
-## 🧩 Evidence To Add
+## 📌 Lessons Learned 
 
-- Credential config screenshot
-- Masked logs
-- Pipeline run
+* Jenkins securely stores credentials in encrypted form.
+* Secrets should never be hardcoded in pipelines.
+* Credentials are injected only during runtime.
+* Masking prevents secret exposure in logs.
+* Hardcoded values are not protected by masking.
+* Incorrect credential IDs cause pipeline failures.
+* Secure injection improves pipeline safety.
+* Secrets are not stored in workspace by default.
+* Dynamic secret usage reduces security risks.
+* Proper credential management protects CI infrastructure.
 
----
-
-## 📌 Lessons Learned (Fill After Lab)
-
-- …
-- …
-- …
-
----
-
-## 🚀 Stretch Exercise
-
-Try:
-
-Use Username/Password credential.
 
 ---
 
 ## 🏁 Lab Completion Checklist
 
-- [ ] Credential added
-- [ ] Secret injected
-- [ ] Masking verified
-- [ ] Hardcoding tested
+- [x] Credential added
+- [x] Secret injected
+- [x] Masking verified
+- [x] Hardcoding tested
 
 ---
 
 > Secure pipelines are essential for protecting infrastructure.
 
+---
+
+## ✍️ Author
+
+**[Himanshu Kumar](https://www.linkedin.com/in/h1manshu-kumar/)** - Learning by building, documenting, and sharing 🚀
