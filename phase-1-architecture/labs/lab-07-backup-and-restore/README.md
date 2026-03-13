@@ -144,23 +144,18 @@ Verify:
 
 ## 🧠 Deep Learning Notes
 
-Jenkins durability depends entirely on:
-
-Jenkins Home persistence.
-
-If Jenkins Home is lost:
-
-Everything is lost.
+- Jenkins durability depends entirely on:
+- Jenkins Home persistence.
+- If Jenkins Home is lost:
+- Everything is lost.
 
 ---
 
 ## 🛠️ Failure Simulation
 
-Corrupt a job config file.
-
-Restart Jenkins.
-
-Observe failure in job loading.
+- Corrupt a job config file.
+- Restart Jenkins.
+- Observe failure in job loading.
 
 ---
 
@@ -184,9 +179,7 @@ Be ready to explain:
 - What happens if Jenkins Home is lost?
 - How to design disaster recovery?
 
-Strong answer:
-
-“Jenkins durability depends on Jenkins Home persistence; regular backups are essential.”
+**Strong answer:** “Jenkins durability depends on Jenkins Home persistence; regular backups are essential.”
 
 ---
 ## 📌 Lessons Learned
