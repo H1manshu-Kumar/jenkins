@@ -19,7 +19,6 @@ Management, DevOps Projects, Beginner DevOps Portfolio**
 This repository demonstrates **hands-on implementation of CI/CD
 pipelines using Jenkins**, simulating real-world DevOps workflows.
 
-✔ Designed for **DevOps interviews (0--3 yrs experience)**\
 ✔ Focus on **production-like pipeline design**\
 ✔ Covers **most asked Jenkins + CI/CD interview topics**
 
@@ -193,11 +192,9 @@ This project helps answer:
 
 ------------------------------------------------------------------------
 
-## ⭐ Final Note
+## ✍️ Author
 
-This project is part of my **DevOps learning journey transitioning from
-QA to DevOps**, focusing on **hands-on implementation and real-world
-pipeline design**.
+**[Himanshu Kumar](https://www.linkedin.com/in/h1manshu-kumar/)** - Learning by building, documenting, and sharing 🚀   
 
 ------------------------------------------------------------------------
 
