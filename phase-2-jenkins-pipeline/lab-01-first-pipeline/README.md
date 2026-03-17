@@ -1,4 +1,4 @@
-# 🚀 Lab 01 -- First Jenkins Pipeline
+# 🚀 Lab 01 - First Jenkins Pipeline
 
 > Hands-on implementation of a basic Jenkins Pipeline to understand
 > pipeline fundamentals.
@@ -61,6 +61,8 @@ pipeline {
 -   Select **Pipeline**\
 -   Click OK
 
+<img width="1000" height="312" alt="image" src="https://github.com/user-attachments/assets/1b6cb552-5027-489a-8939-d488982f04a8" />
+
 ------------------------------------------------------------------------
 
 ### 2. Add Pipeline Script
@@ -68,6 +70,7 @@ pipeline {
 -   Scroll to **Pipeline section**\
 -   Select: *Pipeline script*\
 -   Paste the Jenkinsfile script
+<img width="1280" height="489" alt="image" src="https://github.com/user-attachments/assets/0433ee42-696e-48ea-b954-f9b33131267c" />
 
 ------------------------------------------------------------------------
 
@@ -75,17 +78,9 @@ pipeline {
 
 -   Click **Build Now**\
 -   Observe execution
+<img width="1280" height="489" alt="image" src="https://github.com/user-attachments/assets/b274655f-0656-40a0-9731-055616494ae8" />
 
-------------------------------------------------------------------------
-
-## 📸 Screenshots to Capture
-
-Add these inside `screenshots/` folder:
-
--   Pipeline job configuration\
--   Build execution\
--   Stage view\
--   Console output
+<img width="1280" height="434" alt="image" src="https://github.com/user-attachments/assets/78eec880-7f0f-4926-8e9f-05028e2b9f55" />
 
 ------------------------------------------------------------------------
 
@@ -95,9 +90,13 @@ Console log should show:
 
     Hello from Jenkins Pipeline
 
+<img width="983" height="347" alt="image" src="https://github.com/user-attachments/assets/92dc58b1-ecdf-41e3-adb8-500354ee259f" /> </br>
+
 Stage View:
 
-    Hello ✔
+    Hello ✔   
+    
+<img width="665" height="550" alt="image" src="https://github.com/user-attachments/assets/02d05a6b-e213-4af6-9538-13015cd38dfc" />
 
 ------------------------------------------------------------------------
 
@@ -127,28 +126,39 @@ In real projects:
 -   Pipelines replace manual build processes
 
 ------------------------------------------------------------------------
+## 📌 Lessons Learned
 
-## 🎯 Interview Questions
+- Jenkins Pipeline automates CI/CD workflows using code
+- Declarative pipeline provides structured and readable syntax
+- A pipeline is divided into stages and steps for execution clarity
+- `agent any` allows execution on any available Jenkins node
+- Console logs are essential for debugging pipeline failures
+- Even a simple pipeline follows the same structure as real CI/CD systems
 
-**Q1: What is a Jenkins Pipeline?**\
-A pipeline is a set of automated steps defined as code to build, test,
-and deploy applications.
+------------------------------------------------------------------------
 
-**Q2: What are stages in Jenkins?**\
-Stages divide the pipeline into logical steps like build, test, and
-deploy.
+## 🎯 Key Takeaways
 
-**Q3: What is agent in Jenkins Pipeline?**\
-Agent defines where the pipeline will run (e.g., any available node).
+- I understand how to create and run a Jenkins Pipeline job
+- I can explain the structure of a declarative pipeline (agent, stages, steps)
+- I know how pipeline execution is visualized using Stage View and logs
+- I can debug basic pipeline issues using console output
+- I understand how this simple pipeline scales into real CI/CD workflows
 
 ------------------------------------------------------------------------
 
 ## 📈 Next Step
 
-➡️ Move to **Lab 02 -- Declarative Jenkinsfile**
+➡️ Move to **Lab 02 - Declarative Jenkinsfile**
 
 -   Store pipeline in Git\
 -   Introduce real CI/CD workflow
+
+------------------------------------------------------------------------
+
+## ✍️ Author
+
+**[Himanshu Kumar](https://www.linkedin.com/in/h1manshu-kumar/)** - Learning by building, documenting, and sharing 🚀
 
 ------------------------------------------------------------------------
 
@@ -160,4 +170,5 @@ critical for building real CI/CD workflows in DevOps.
 ------------------------------------------------------------------------
 
 🔥 *First step from manual jobs to automated pipelines.*
+
 
