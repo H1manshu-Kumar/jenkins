@@ -213,10 +213,9 @@ Jenkins architecture, CI/CD pipeline, DevOps learning, distributed builds, Jenki
 
 ---
 
-## 🧑‍💻 Author
+## ✍️ Author
 
-**Himanshu Kumar**  
-DevOps Learning Journey — From Automation to Infrastructure
+**[Himanshu Kumar](https://www.linkedin.com/in/h1manshu-kumar/)** - Learning by building, documenting, and sharing 🚀
 
 ---
 
