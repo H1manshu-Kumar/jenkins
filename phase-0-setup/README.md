@@ -2,7 +2,7 @@
 
 Welcome to **Jenkins Phase 0**, where the focus is on building a strong foundation for CI/CD by installing, configuring, and validating Jenkins in a production‑style environment.
 
-This phase emphasizes **hands‑on setup**, **operational understanding**, and **platform thinking** - ensuring Jenkins is ready for pipelines, automation workflows, and real‑world CI/CD scenarios.
+This phase emphasizes **hands‑on setup**, **operational understanding**, and **platform thinking** - ensuring Jenkins is ready for pipelines, automation workflows, and real‑world CI/CD scenarios
 
 ---
 
@@ -23,7 +23,7 @@ Establish a fully functional Jenkins environment with:
 
 ## 🔎 SEO Keywords
 
-Jenkins setup, Jenkins Phase 0, Jenkins installation guide, Jenkins Docker setup, CI/CD pipeline foundation, Jenkins beginner guide, Jenkins hands‑on lab, Jenkins environment setup, DevOps Jenkins tutorial, Jenkins configuration best practices, Jenkins learning roadmap.
+Jenkins setup, Jenkins Phase 0, Jenkins installation guide, Jenkins Docker setup, CI/CD pipeline foundation, Jenkins beginner guide, Jenkins hands‑on lab, Jenkins environment setup, DevOps Jenkins tutorial, Jenkins configuration best practices, Jenkins learning roadmap
 
 ---
 
