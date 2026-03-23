@@ -209,7 +209,7 @@ This repository is part of a public learning journey documenting practical DevOp
 
 ## ⭐ Keywords (For Discoverability)
 
-Jenkins architecture, CI/CD pipeline, DevOps learning, distributed builds, Jenkins agents, pipeline as code, CI reliability, Jenkins internals, DevOps portfolio, Jenkins labs, CI troubleshooting, DevOps hands-on.
+Jenkins architecture, CI/CD pipeline, DevOps learning, distributed builds, Jenkins agents, pipeline as code, CI reliability, Jenkins internals, DevOps portfolio, Jenkins labs, CI troubleshooting, DevOps hands-on
 
 ---
 
