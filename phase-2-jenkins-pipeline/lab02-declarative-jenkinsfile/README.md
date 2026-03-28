@@ -112,10 +112,13 @@ pipeline {
 ## 📊 Expected Output
 
 ``` text
-Building application...
-Running tests...
-Deploying application...
+Building applicaiton...
+Running Tests!!
+Deploying Applicaiton!
 ```
+<img width="992" height="613" alt="image" src="https://github.com/user-attachments/assets/413d0f95-b3a0-421b-97fd-1ccc1cfec27b" />
+<img width="1012" height="593" alt="image" src="https://github.com/user-attachments/assets/8be997fc-2157-4eef-96b7-d9cfbe6b0717" />
+
 
 ------------------------------------------------------------------------
 
