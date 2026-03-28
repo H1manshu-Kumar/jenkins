@@ -93,6 +93,10 @@ pipeline {
 -   Add repo URL\
 -   Script Path: `Jenkinsfile`
 
+<img width="870" height="515" alt="image" src="https://github.com/user-attachments/assets/bb8b96d4-6ab2-430e-a3c4-f4c922f1d5bf" />
+
+<img width="870" height="141" alt="image" src="https://github.com/user-attachments/assets/57d292f6-377a-4fac-83c9-523386d81d3a" />
+
 ------------------------------------------------------------------------
 
 ### Step 4 - Run Pipeline
@@ -101,6 +105,7 @@ pipeline {
 -   Observe:
     -   Stages executed from Jenkinsfile
     -   Logs pulled from SCM-based pipeline
+<img width="842" height="522" alt="image" src="https://github.com/user-attachments/assets/2ea8d55e-d92e-4c18-a747-a9c5008dc0cf" />
 
 ------------------------------------------------------------------------
 
