@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify
-from models import init_db, add_entry, get_all_entries, get_stats
+from .models import init_db, add_entry, get_all_entries, get_stats
 
 app = Flask(__name__)
 init_db()
