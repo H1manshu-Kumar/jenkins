@@ -14,9 +14,8 @@ pipeline {
         echo 'Setting up Python virtual environment and installing dependencies...'
         dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline/devpulse') {
             sh '''
-                python3 -m venv venv || virtualenv venv
+                python3 -m venv venv --system-site-packages
                 . venv/bin/activate
-                pip install --upgrade pip
                 pip install -r requirements.txt
             '''
         }
