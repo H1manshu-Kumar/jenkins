@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out code from SCM...'
-                // Jenkins automatically checks out the repository
+                git 'https://github.com/H1manshu-Kumar/jenkins-devops-learning-labs.git'
             }
         }
         
