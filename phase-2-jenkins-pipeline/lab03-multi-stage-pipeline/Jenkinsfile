@@ -51,7 +51,8 @@ pipeline {
                             --exclude="*.pyc" \
                             --exclude="venv" \
                             --exclude="*.db" \
-                            .
+                            --exclude="devpulse-build.tar.gz" \
+                            . || true
                     '''
                 }
             }
