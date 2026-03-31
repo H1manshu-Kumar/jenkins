@@ -14,9 +14,10 @@ pipeline {
         echo 'Setting up Python virtual environment and installing dependencies...'
         dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline/devpulse') {
             sh '''
-                python3 -m venv venv
-                venv/bin/pip install --upgrade pip
-                venv/bin/pip install -r requirements.txt
+                python3 -m venv venv || virtualenv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
             '''
         }
     }
@@ -26,7 +27,7 @@ stage('Lint') {
     steps {
         echo 'Running flake8 linting on Python files...'
         dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline/devpulse') {
-            sh 'venv/bin/flake8 app.py models.py --max-line-length=100'
+            sh '. venv/bin/activate && flake8 app.py models.py --max-line-length=100'
         }
     }
 }
@@ -35,7 +36,7 @@ stage('Test') {
     steps {
         echo 'Running pytest test suite...'
         dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline/devpulse') {
-            sh 'venv/bin/pytest tests/ -v'
+            sh '. venv/bin/activate && pytest tests/ -v'
         }
     }
 }
@@ -59,7 +60,8 @@ stage('Test') {
         echo 'Starting Flask app and performing health check...'
         dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline/devpulse') {
             sh '''
-                venv/bin/python app.py &
+                . venv/bin/activate
+                python app.py &
                 APP_PID=$!
                 echo "Flask app started with PID: $APP_PID"
 
