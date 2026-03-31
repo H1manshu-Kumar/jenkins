@@ -45,12 +45,13 @@ pipeline {
                 echo 'Creating build artifact...'
                 dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
                     sh '''
-                        zip -r devpulse-build.zip . \
-                            -x "*.git*" \
-                            -x "*__pycache__*" \
-                            -x "*.pyc" \
-                            -x "*venv*" \
-                            -x "*.db"
+                        tar -czf devpulse-build.tar.gz \
+                            --exclude=".git" \
+                            --exclude="__pycache__" \
+                            --exclude="*.pyc" \
+                            --exclude="venv" \
+                            --exclude="*.db" \
+                            .
                     '''
                 }
             }
@@ -91,7 +92,7 @@ pipeline {
             steps {
                 echo 'Archiving build artifact...'
                 dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
-                    archiveArtifacts artifacts: 'devpulse-build.zip', fingerprint: true
+                    archiveArtifacts artifacts: 'devpulse-build.tar.gz', fingerprint: true
                 }
             }
         }
