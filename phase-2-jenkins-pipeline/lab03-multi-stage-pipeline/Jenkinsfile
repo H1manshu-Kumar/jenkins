@@ -1,0 +1,113 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code from SCM...'
+                git branch: 'feat/phase-2-pipelines', url: 'https://github.com/H1manshu-Kumar/jenkins-devops-learning-labs.git'
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                echo 'Setting up Python virtual environment and installing dependencies...'
+                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                    sh '''
+                        python3 -m venv venv --system-site-packages
+                        . venv/bin/activate
+                        pip install -r devpulse/requirements.txt --break-system-packages
+                    '''
+                }
+            }
+        }
+        
+        stage('Lint') {
+            steps {
+                echo 'Running flake8 linting on Python files...'
+                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                    sh '. venv/bin/activate && flake8 devpulse/app.py devpulse/models.py --max-line-length=100'
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Running pytest test suite...'
+                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                    sh '. venv/bin/activate && pytest tests/ -v'
+                }
+            }
+        }
+        
+        stage('Build Artifact') {
+            steps {
+                echo 'Creating build artifact...'
+                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                    sh '''
+                        tar -czf devpulse-build.tar.gz \
+                            --exclude=".git" \
+                            --exclude="__pycache__" \
+                            --exclude="*.pyc" \
+                            --exclude="venv" \
+                            --exclude="*.db" \
+                            --exclude="devpulse-build.tar.gz" \
+                            . || true
+                    '''
+                }
+            }
+        }
+        
+        stage('Health Check') {
+            steps {
+                echo 'Starting Flask app and performing health check...'
+                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                    sh '''
+                        . venv/bin/activate
+                        cd devpulse
+                        python app.py &
+                        APP_PID=$!
+                        echo "Flask app started with PID: $APP_PID"
+
+                        sleep 5
+
+                        HEALTH_RESPONSE=$(curl -s http://localhost:5000/health)
+                        echo "Health check response: $HEALTH_RESPONSE"
+
+                        if echo "$HEALTH_RESPONSE" | grep -q '"status": "ok"'; then
+                            echo "Health check passed!"
+                        else
+                            echo "Health check failed!"
+                            kill $APP_PID
+                            exit 1
+                        fi
+
+                        kill $APP_PID
+                        echo "Flask app stopped"
+                    '''
+                }
+            }
+        }
+        
+        stage('Archive') {
+            steps {
+                echo 'Archiving build artifact...'
+                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                    archiveArtifacts artifacts: 'devpulse-build.tar.gz', fingerprint: true
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo 'Pipeline finished'
+        }
+        success {
+            echo 'Build passed'
+        }
+        failure {
+            echo 'Build failed — check logs'
+        }
+    }
+}

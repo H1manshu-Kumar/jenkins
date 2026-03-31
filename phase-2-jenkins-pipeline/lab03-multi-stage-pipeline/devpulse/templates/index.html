@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevPulse - Log Entry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>DevPulse</h1>
+        <p class="subtitle">Track your daily developer metrics</p>
+        
+        <form action="/log" method="POST" class="entry-form">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="tasks_done">Tasks Done:</label>
+            <input type="number" id="tasks_done" name="tasks_done" min="0" required>
+            
+            <label for="bugs_fixed">Bugs Fixed:</label>
+            <input type="number" id="bugs_fixed" name="bugs_fixed" min="0" required>
+            
+            <label for="prs_raised">PRs Raised:</label>
+            <input type="number" id="prs_raised" name="prs_raised" min="0" required>
+            
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes" rows="3"></textarea>
+            
+            <button type="submit">Log Entry</button>
+        </form>
+        
+        <a href="/dashboard" class="link">View Dashboard</a>
+    </div>
+</body>
+</html>
