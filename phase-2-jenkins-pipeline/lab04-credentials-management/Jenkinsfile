@@ -1,0 +1,23 @@
+pipeline {
+
+    agent { label 'docker' }
+
+    stages {
+
+        stage('Use Secret') {
+            steps {
+                withCredentials([string(credentialsId: 'my-secret', variable: 'SECRET')]) {
+                    sh 'echo "Using secret safely"'
+                }
+            }
+        }
+
+        stage('Simulate Secure API Call') {
+            steps {
+                withCredentials([string(credentialsId: 'my-secret', variable: 'SECRET')]) {
+                    sh 'echo "Calling API with token (masked)"'
+                }
+            }
+        }
+    }
+}
