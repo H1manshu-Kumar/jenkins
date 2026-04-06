@@ -1,4 +1,4 @@
-# 🔐 Lab 04 -- Jenkins Credentials & Secure Pipelines
+# 🔐 Lab 04 - Jenkins Credentials & Secure Pipelines
 
 > Implementing secure CI/CD pipelines using Jenkins Credentials Store
 > (no hardcoded secrets).
@@ -157,7 +157,7 @@ All secrets are **externalized and secured**.
 
 ## 🚀 Next Lab
 
-➡️ Lab 05 -- Artifact Management (real artifact storage)
+➡️ Lab 05 - Artifact Management (real artifact storage)
 
 ------------------------------------------------------------------------
 
