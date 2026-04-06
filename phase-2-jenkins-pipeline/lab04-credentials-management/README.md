@@ -57,9 +57,11 @@ Types: - Secret Text (API key) - Username/Password - SSH Key
 
 Example: - ID: `my-secret` - Type: Secret Text
 
+<img width="1003" height="463" alt="image" src="https://github.com/user-attachments/assets/44a26b8e-c66e-46bc-9621-f9cc515b0868" />
+
 ------------------------------------------------------------------------
 
-### Step 2 -- Jenkinsfile (Secure Pipeline)
+### Step 2 - Jenkinsfile (Secure Pipeline)
 
 ``` groovy
 pipeline {
@@ -86,15 +88,6 @@ pipeline {
     }
 }
 ```
-
-------------------------------------------------------------------------
-
-## 📸 Screenshots to Capture
-
--   Credentials configuration\
--   Jenkinsfile usage\
--   Pipeline execution\
--   Console output (masked secrets)
 
 ------------------------------------------------------------------------
 
@@ -158,6 +151,12 @@ All secrets are **externalized and secured**.
 ## 🚀 Next Lab
 
 ➡️ Lab 05 - Artifact Management (real artifact storage)
+
+------------------------------------------------------------------------
+
+## ✍️ Author
+
+**[Himanshu Kumar](https://www.linkedin.com/in/h1manshu-kumar/)** - Learning by building, documenting, and sharing 🚀
 
 ------------------------------------------------------------------------
 
