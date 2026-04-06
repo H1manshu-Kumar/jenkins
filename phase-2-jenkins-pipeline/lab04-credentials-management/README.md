@@ -88,6 +88,7 @@ pipeline {
     }
 }
 ```
+<img width="1007" height="509" alt="image" src="https://github.com/user-attachments/assets/5a309aa3-9f9c-4966-97eb-2ac6a921605a" />
 
 ------------------------------------------------------------------------
 
@@ -127,6 +128,10 @@ Jenkins → Credentials Store → Secure API / Docker / Git Access
 ```
 
 All secrets are **externalized and secured**.
+
+<img width="1007" height="654" alt="image" src="https://github.com/user-attachments/assets/80876fd3-41ff-46f3-8c7f-b431e9f5ca13" />
+
+<img width="1007" height="654" alt="image" src="https://github.com/user-attachments/assets/ba720e6b-b669-424b-ac3d-0ece12d9ed47" />
 
 ------------------------------------------------------------------------
 
