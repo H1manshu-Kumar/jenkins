@@ -12,11 +12,11 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Setting up Python virtual environment and installing dependencies...'
-                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                dir("${WORKSPACE}/devpulse") {
                     sh '''
                         python3 -m venv venv --system-site-packages
                         . venv/bin/activate
-                        pip install -r devpulse/requirements.txt --break-system-packages
+                        pip install -r requirements.txt --break-system-packages
                     '''
                 }
             }
@@ -25,8 +25,8 @@ pipeline {
         stage('Lint') {
             steps {
                 echo 'Running flake8 linting on Python files...'
-                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
-                    sh '. venv/bin/activate && flake8 devpulse/app.py devpulse/models.py --max-line-length=100'
+                dir("${WORKSPACE}/devpulse") {
+                    sh '. venv/bin/activate && flake8 app.py models.py --max-line-length=100'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running pytest test suite...'
-                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                dir("${WORKSPACE}/devpulse") {
                     sh '. venv/bin/activate && pytest tests/ -v'
                 }
             }
@@ -43,7 +43,7 @@ pipeline {
         stage('Build Artifact') {
             steps {
                 echo 'Creating build artifact...'
-                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                dir("${WORKSPACE}/devpulse") {
                     sh '''
                         tar -czf devpulse-build.tar.gz \
                             --exclude=".git" \
@@ -61,10 +61,9 @@ pipeline {
         stage('Health Check') {
             steps {
                 echo 'Starting Flask app and performing health check...'
-                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                dir("${WORKSPACE}/devpulse") {
                     sh '''
                         . venv/bin/activate
-                        cd devpulse
                         python app.py &
                         APP_PID=$!
                         echo "Flask app started with PID: $APP_PID"
@@ -92,7 +91,7 @@ pipeline {
         stage('Archive') {
             steps {
                 echo 'Archiving build artifact...'
-                dir('phase-2-jenkins-pipeline/lab03-multi-stage-pipeline') {
+                dir("${WORKSPACE}/devpulse") {
                     archiveArtifacts artifacts: 'devpulse-build.tar.gz', fingerprint: true
                 }
             }
