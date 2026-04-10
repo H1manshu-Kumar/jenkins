@@ -89,6 +89,11 @@ python app.py
 ```
 http://localhost:5000
 ```
+<img width="1280" height="716" alt="image" src="https://github.com/user-attachments/assets/fae0402a-2093-4e02-9ef1-f8eedc29e9a0" />
+
+
+<img width="1280" height="611" alt="image" src="https://github.com/user-attachments/assets/b735407a-85c2-4ecb-8113-f1ff89fe6ecf" />
+
 
 ---
 
