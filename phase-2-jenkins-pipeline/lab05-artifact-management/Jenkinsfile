@@ -58,17 +58,13 @@ pipeline {
                             --junitxml=reports/junit.xml \
                             --cov=. \
                             --cov-report=xml:reports/coverage.xml \
-                            -v || true
+                            -v
                     '''
                 }
             }
             post {
                 always {
-                    script {
-                        if (fileExists("${WORKSPACE}/phase-2-jenkins-pipeline/devpulse/reports/junit.xml")) {
-                            junit "${WORKSPACE}/phase-2-jenkins-pipeline/devpulse/reports/junit.xml"
-                        }
-                    }
+                    junit allowEmptyResults: true, testResults: "${WORKSPACE}/phase-2-jenkins-pipeline/devpulse/reports/junit.xml"
                 }
             }
         }
