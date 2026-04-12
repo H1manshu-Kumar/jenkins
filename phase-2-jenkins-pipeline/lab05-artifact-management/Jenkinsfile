@@ -42,7 +42,7 @@ pipeline {
                 dir("${WORKSPACE}/phase-2-jenkins-pipeline/devpulse") {
                     sh '''
                         . venv/bin/activate
-                        flake8 src/ --max-line-length=100
+                        flake8 *.py --max-line-length=100
                     '''
                 }
             }
@@ -55,7 +55,7 @@ pipeline {
                         . venv/bin/activate
                         pytest tests/ \
                             --junitxml=reports/junit.xml \
-                            --cov=src \
+                            --cov=. \
                             --cov-report=xml:reports/coverage.xml \
                             -v
                     '''
