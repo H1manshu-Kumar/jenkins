@@ -50,6 +50,7 @@ This lab demonstrates **production-grade artifact management** in a Jenkins CI/C
 - Jenkins credentials configured:
   - `aws-access-key-id`
   - `aws-secret-access-key`
+<img width="1044" height="111" alt="image" src="https://github.com/user-attachments/assets/e603a77b-3a1b-488c-bdae-863d53ee4591" />
 
 ---
 
@@ -66,10 +67,6 @@ environment {
     APP_VERSION           = "1.0.${BUILD_NUMBER}"
 }
 ```
-
-**Screenshot Placeholder:**
-![Environment Variables Configuration](./screenshots/01-environment-config.png)
-
 ---
 
 ### 2️⃣ Code Checkout
@@ -104,9 +101,11 @@ stage('Setup') {
 ```
 
 Creates isolated Python virtual environment and installs dependencies.
+<img width="1274" height="386" alt="image" src="https://github.com/user-attachments/assets/d6cd5e4e-2888-428e-ac77-425b7f09da36" />
 
-**Screenshot Placeholder:**
-![Setup Stage Execution](./screenshots/02-setup-stage.png)
+<img width="1274" height="386" alt="image" src="https://github.com/user-attachments/assets/cb963b04-47c0-4ae8-863a-980bfd3c8ea3" />
+
+<img width="1274" height="386" alt="image" src="https://github.com/user-attachments/assets/a2bda21b-4376-48d5-8e59-f6508a4c677d" />
 
 ---
 
@@ -127,8 +126,9 @@ stage('Lint') {
 
 Ensures code quality and adherence to Python PEP8 standards.
 
-**Screenshot Placeholder:**
-![Lint Stage Results](./screenshots/03-lint-stage.png)
+<img width="1274" height="386" alt="image" src="https://github.com/user-attachments/assets/f1e0ed30-5c5e-4b6e-97aa-eb27e42104f9" />
+
+<img width="1274" height="386" alt="image" src="https://github.com/user-attachments/assets/8c20cd39-a739-4f1b-be66-017449978779" />
 
 ---
 
@@ -159,8 +159,7 @@ stage('Test') {
 
 Runs unit tests with coverage reporting and publishes results to Jenkins.
 
-**Screenshot Placeholder:**
-![Test Results Dashboard](./screenshots/04-test-results.png)
+<img width="1274" height="386" alt="image" src="https://github.com/user-attachments/assets/a1288858-1281-4093-9351-7cd6a44d3e02" />
 
 ---
 
@@ -182,8 +181,9 @@ stage('Build') {
 
 Creates versioned tarball artifact containing application code and dependencies.
 
-**Screenshot Placeholder:**
-![Build Artifact Creation](./screenshots/05-build-stage.png)
+<img width="1274" height="428" alt="image" src="https://github.com/user-attachments/assets/48430e9f-aad8-42e2-a246-104fde308dff" />
+
+<img width="1274" height="428" alt="image" src="https://github.com/user-attachments/assets/8377bf0d-9089-494a-bed9-6b0545928f6e" />
 
 ---
 
@@ -205,8 +205,9 @@ stage('Archive') {
 
 Archives artifacts in Jenkins for quick access and download.
 
-**Screenshot Placeholder:**
-![Archived Artifacts in Jenkins](./screenshots/06-archive-stage.png)
+<img width="1274" height="160" alt="image" src="https://github.com/user-attachments/assets/382a555b-a0e6-4918-ad5a-92125f97242d" />
+
+<img width="978" height="220" alt="image" src="https://github.com/user-attachments/assets/e36c25ea-1bc4-4a67-80aa-e2fb4f45605a" />
 
 ---
 
@@ -240,8 +241,11 @@ stage('Upload to S3') {
 
 Uploads versioned artifacts to AWS S3 for long-term storage and distribution.
 
-**Screenshot Placeholder:**
-![S3 Upload Success](./screenshots/07-s3-upload.png)
+<img width="1280" height="448" alt="image" src="https://github.com/user-attachments/assets/e5639883-a699-4c85-9273-e5fab7dc524b" />
+
+<img width="1280" height="448" alt="image" src="https://github.com/user-attachments/assets/e0a425c5-45da-47ca-8bde-31ebbfcce1db" />
+
+<img width="1277" height="458" alt="image" src="https://github.com/user-attachments/assets/0c88c634-1ab5-43fc-b96c-8d8b715e1fc5" />
 
 ---
 
@@ -262,6 +266,8 @@ post {
 ```
 
 Cleans workspace and provides build status notifications.
+
+<img width="1277" height="169" alt="image" src="https://github.com/user-attachments/assets/555d9a46-c594-4b38-8f39-3084cf4cfcf6" />
 
 ---
 
@@ -288,19 +294,15 @@ Cleans workspace and provides build status notifications.
   ]
 }
 ```
-
-**Screenshot Placeholder:**
-![IAM Policy Configuration](./screenshots/08-iam-policy.png)
+<img width="1278" height="556" alt="image" src="https://github.com/user-attachments/assets/c3adab59-e9ca-436e-8a46-da5eda10ea6a" />
 
 ---
 
 ## 📊 Pipeline Execution Results
 
-**Screenshot Placeholder:**
-![Complete Pipeline Success](./screenshots/09-pipeline-success.png)
+<img width="1278" height="570" alt="image" src="https://github.com/user-attachments/assets/6befe6fa-42e0-4ab6-b6d9-7b0d8eece339" />
 
-**Screenshot Placeholder:**
-![S3 Bucket with Versioned Artifacts](./screenshots/10-s3-bucket-artifacts.png)
+<img width="1273" height="423" alt="image" src="https://github.com/user-attachments/assets/b4b71757-882e-49ec-9879-f19eed2071bf" />
 
 ---
 
@@ -359,28 +361,8 @@ Cleans workspace and provides build status notifications.
 lab05-artifact-management/
 ├── Jenkinsfile                 # Pipeline definition
 ├── README.md                   # This file
-└── screenshots/                # Pipeline execution screenshots
-    ├── 01-environment-config.png
-    ├── 02-setup-stage.png
-    ├── 03-lint-stage.png
-    ├── 04-test-results.png
-    ├── 05-build-stage.png
-    ├── 06-archive-stage.png
-    ├── 07-s3-upload.png
-    ├── 08-iam-policy.png
-    ├── 09-pipeline-success.png
-    └── 10-s3-bucket-artifacts.png
+
 ```
-
----
-
-## 🔗 Related Labs
-
-- **Lab 04**: Testing & Quality Gates
-- **Lab 06**: Docker Integration
-- **Lab 07**: Deployment Automation
-
----
 
 ## 📝 Dependencies
 
