@@ -53,6 +53,7 @@ pipeline {
                 dir("${WORKSPACE}/phase-2-jenkins-pipeline/devpulse") {
                     sh '''
                         . venv/bin/activate
+                        mkdir -p reports
                         pytest tests/ \
                             --junitxml=reports/junit.xml \
                             --cov=. \
