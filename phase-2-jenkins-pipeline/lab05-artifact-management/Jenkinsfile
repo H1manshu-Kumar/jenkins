@@ -101,6 +101,7 @@ pipeline {
                         
                         if ! command -v aws &> /dev/null; then
                             echo "AWS CLI not found, installing..."
+                            . venv/bin/activate
                             pip install awscli
                         fi
 
