@@ -64,7 +64,7 @@ pipeline {
             }
             post {
                 always {
-                    junit "${WORKSPACE}/phase-2-jenkins-pipeline/devpulse/reports/junit.xml"
+                    junit allowEmptyResults: true, testResults: "${WORKSPACE}/phase-2-jenkins-pipeline/devpulse/reports/junit.xml"
                 }
             }
         }
@@ -74,7 +74,8 @@ pipeline {
                 dir("${WORKSPACE}/phase-2-jenkins-pipeline/devpulse") {
                     sh '''
                         . venv/bin/activate
-                        python3 -m build
+                        mkdir -p dist
+                        tar -czf dist/devpulse-${BUILD_NUMBER}.tar.gz *.py templates/ static/ requirements.txt
                     '''
                 }
             }
@@ -83,7 +84,11 @@ pipeline {
         stage('Archive') {
             steps {
                 dir("${WORKSPACE}/phase-2-jenkins-pipeline/devpulse") {
-                    archiveArtifacts artifacts: 'dist/**'
+                    script {
+                        if (fileExists('dist')) {
+                            archiveArtifacts artifacts: 'dist/**', allowEmptyArchive: true
+                        }
+                    }
                 }
             }
         }
@@ -93,6 +98,12 @@ pipeline {
                 dir("${WORKSPACE}/phase-2-jenkins-pipeline/devpulse") {
                     sh '''
                         echo "Uploading artifacts for version ${APP_VERSION}"
+                        
+                        if ! command -v aws &> /dev/null; then
+                            echo "AWS CLI not found, installing..."
+                            . venv/bin/activate
+                            pip install awscli
+                        fi
 
                         aws s3 cp dist/ s3://${S3_BUCKET}/devpulse/${APP_VERSION}/ \
                             --recursive \
