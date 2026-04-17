@@ -182,8 +182,8 @@ pipeline {
                 // - Clean up local Docker images to save disk space
                 // - || true prevents pipeline failure if image already removed
                 sh """
-                    docker rmi ${IMAGE_NAME}:${IMAGE_TAG} || true
-                    docker rmi ${IMAGE_NAME}:latest || true
+                    docker rmi ${env.IMAGE_NAME}:${env.IMAGE_TAG} || true
+                    docker rmi ${env.IMAGE_NAME}:latest || true
                     docker logout || true
                 """
             }
@@ -195,16 +195,16 @@ pipeline {
             ============================================
             DevPulse Docker Image Published Successfully
             ============================================
-            Image   : ${IMAGE_NAME}:${IMAGE_TAG}
-            Version : ${APP_VERSION}
-            Build   : #${BUILD_NUMBER}
-            Commit  : ${GIT_COMMIT}
-            Registry: https://hub.docker.com/r/${IMAGE_NAME}
+            Image   : ${env.IMAGE_NAME}:${env.IMAGE_TAG}
+            Version : ${env.APP_VERSION}
+            Build   : #${env.BUILD_NUMBER}
+            Commit  : ${env.GIT_COMMIT}
+            Registry: https://hub.docker.com/r/${env.IMAGE_NAME}
             ============================================
             """
         }
         failure {
-            echo "Pipeline failed at stage: ${STAGE_NAME}. Check logs above for details."
+            echo "Pipeline failed. Check logs above for details."
         }
     }
 }
