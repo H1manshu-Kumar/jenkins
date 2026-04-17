@@ -177,19 +177,6 @@ pipeline {
 
     // ── Post-Build Actions ────────────────────────────────────────────────
     post {
-        always {
-            script {
-                // - Clean up local Docker images to save disk space
-                // - || true prevents pipeline failure if image already removed
-                sh """
-                    docker rmi ${env.IMAGE_NAME}:${env.IMAGE_TAG} || true
-                    docker rmi ${env.IMAGE_NAME}:latest || true
-                    docker logout || true
-                """
-            }
-            // - Clean Jenkins workspace (consistent with Lab-05)
-            cleanWs()
-        }
         success {
             echo """
             ============================================
