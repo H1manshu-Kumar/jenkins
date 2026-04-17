@@ -11,7 +11,7 @@ pipeline {
 
         // - Docker image config
         // - IMPORTANT: Update DOCKERHUB_USERNAME to your DockerHub username
-        DOCKERHUB_USERNAME = 'dockerhub-creds'
+        DOCKERHUB_USERNAME = 'himan5hu'
         IMAGE_NAME         = "${DOCKERHUB_USERNAME}/${APP_NAME}"
         IMAGE_TAG          = "${APP_VERSION}"
 
