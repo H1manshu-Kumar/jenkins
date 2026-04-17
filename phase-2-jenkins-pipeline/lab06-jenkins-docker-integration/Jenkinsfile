@@ -1,11 +1,6 @@
 pipeline {
 
-    agent {
-        docker {
-            image 'python:3.11-slim'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     environment {
         // - Application metadata
@@ -80,21 +75,7 @@ pipeline {
             }
         }
 
-        // ── Stage 5: Install Docker CLI ───────────────────────────────────
-        // - Docker CLI is NOT in python:3.11-slim by default
-        // - We install it here so the agent can run docker commands
-        // - The socket mount (-v /var/run/docker.sock) lets it talk to host daemon
-        stage('Install Docker CLI') {
-            steps {
-                sh '''
-                    apt-get update -qq
-                    apt-get install -y --no-install-recommends docker.io
-                    docker --version
-                '''
-            }
-        }
-
-        // ── Stage 6: Docker Build ─────────────────────────────────────────
+        // ── Stage 5: Docker Build ─────────────────────────────────────────
         stage('Docker Build') {
             steps {
                 dir("${APP_DIR}") {
@@ -118,7 +99,7 @@ pipeline {
             }
         }
 
-        // ── Stage 7: Docker Login ─────────────────────────────────────────
+        // ── Stage 6: Docker Login ─────────────────────────────────────────
         // - Credentials stored in Jenkins Credentials Store (never hardcoded)
         // - ID 'dockerhub-creds' must match what you configured in Jenkins
         stage('Docker Login') {
@@ -133,7 +114,7 @@ pipeline {
             }
         }
 
-        // ── Stage 8: Docker Push ──────────────────────────────────────────
+        // ── Stage 7: Docker Push ──────────────────────────────────────────
         // - Push both versioned tag AND latest tag
         // - Versioned tag = traceability & rollback
         // - Latest tag = convenience for dev/staging pulls
@@ -153,7 +134,7 @@ pipeline {
             }
         }
 
-        // ── Stage 9: Validate Image (Smoke Test) ─────────────────────────
+        // ── Stage 8: Validate Image (Smoke Test) ─────────────────────────
         // - Pull back the pushed image and do a quick smoke test
         // - Confirms the image is actually pullable from registry
         // - Simulates what a deployment pipeline would do
