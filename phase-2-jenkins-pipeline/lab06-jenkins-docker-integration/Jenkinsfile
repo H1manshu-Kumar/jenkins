@@ -1,0 +1,147 @@
+pipeline {
+    agent {
+        label 'built-in'
+    }
+
+    environment {
+        APP_NAME           = 'devpulse'
+        APP_VERSION        = "1.0.${BUILD_NUMBER}"
+        DOCKERHUB_USERNAME = 'himan5hu'
+        IMAGE_NAME         = "${DOCKERHUB_USERNAME}/${APP_NAME}"
+        IMAGE_TAG          = "${APP_VERSION}"
+        APP_DIR            = "${WORKSPACE}/phase-2-jenkins-pipeline/devpulse"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+                script {
+                    env.GIT_COMMIT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                }
+            }
+        }
+
+        stage('Setup Python') {
+            steps {
+                dir("${APP_DIR}") {
+                    sh '''
+                        pip3 install --break-system-packages --upgrade pip
+                        pip3 install --break-system-packages -r requirements.txt
+                    '''
+                }
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                dir("${APP_DIR}") {
+                    sh 'flake8 *.py --max-line-length=100 || true'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir("${APP_DIR}") {
+                    sh '''
+                        mkdir -p reports
+                        pytest tests/ \
+                            --junitxml=reports/junit.xml \
+                            --cov=. \
+                            --cov-report=xml:reports/coverage.xml \
+                            -v || true
+                    '''
+                }
+            }
+            post {
+                always {
+                    junit allowEmptyResults: true, testResults: "${APP_DIR}/reports/junit.xml"
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                dir("${APP_DIR}") {
+                    script {
+                        echo "Building Docker image: ${IMAGE_NAME}:${IMAGE_TAG}"
+                        sh """
+                            docker build \
+                                --label build.number=${BUILD_NUMBER} \
+                                --label build.version=${APP_VERSION} \
+                                --label git.commit=${GIT_COMMIT} \
+                                -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                                -t ${IMAGE_NAME}:latest \
+                                -f Dockerfile .
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'dockerhub-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )]) {
+                        sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
+                    }
+                }
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                script {
+                    echo "Pushing image: ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh """
+                        docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                        docker push ${IMAGE_NAME}:latest
+                    """
+                }
+            }
+        }
+
+        stage('Validate Image') {
+            steps {
+                script {
+                    echo "Validating pushed image..."
+                    sh """
+                        docker pull ${IMAGE_NAME}:${IMAGE_TAG}
+                        docker run --rm ${IMAGE_NAME}:${IMAGE_TAG} python -c "from app import app; print('✓ App imports successfully')"
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo """
+            ============================================
+            DevPulse Docker Image Published Successfully
+            ============================================
+            Image   : ${env.IMAGE_NAME}:${env.IMAGE_TAG}
+            Version : ${env.APP_VERSION}
+            Build   : #${env.BUILD_NUMBER}
+            Commit  : ${env.GIT_COMMIT}
+            Registry: https://hub.docker.com/r/${env.IMAGE_NAME}
+            ============================================
+            """
+        }
+        failure {
+            echo "Pipeline failed. Check logs above for details."
+        }
+        always {
+            sh """
+                docker rmi ${IMAGE_NAME}:${IMAGE_TAG} || true
+                docker rmi ${IMAGE_NAME}:latest || true
+                docker logout || true
+            """
+        }
+    }
+}
