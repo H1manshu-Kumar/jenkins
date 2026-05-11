@@ -107,16 +107,16 @@ phase-3-agents/
 Before starting — verify these are true:
 
 ```
-[ ] Jenkins container is running
+[x] Jenkins container is running
     → curl http://localhost:8080  should return Jenkins UI
 
-[ ] Docker is installed and working
+[x] Docker is installed and working
     → docker ps  should show your Jenkins container
 
-[ ] You know your Jenkins container name
+[x] You know your Jenkins container name
     → docker ps --format "{{.Names}}"
 
-[ ] Port 50000 is exposed on your Jenkins container
+[x] Port 50000 is exposed on your Jenkins container
     → docker inspect <container-name> | grep 50000
     → If NOT exposed, you will need to recreate the container (steps below)
 ```
