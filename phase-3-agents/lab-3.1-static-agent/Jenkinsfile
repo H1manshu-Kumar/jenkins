@@ -1,0 +1,48 @@
+pipeline {
+    // Target agent by label — NOT 'agent any' which could run on controller
+    agent { label 'linux-agent' }
+
+    stages {
+        stage('Verify - Running on Agent') {
+            steps {
+                // These commands prove WHERE the build is running
+                sh 'echo "Hostname: $(hostname)"'
+                sh 'echo "Whoami: $(whoami)"'
+                sh 'echo "Working dir: $(pwd)"'
+                sh 'echo "Build number: ${BUILD_NUMBER}"'
+            }
+        }
+
+        stage('Verify - Not on Controller') {
+            steps {
+                // Controller hostname will be different from agent hostname
+                sh '''
+                    echo "If this hostname matches your Jenkins controller container ID"
+                    echo "something is wrong — build is on controller, not agent"
+                    hostname
+                '''
+            }
+        }
+
+        stage('Simple Build Task') {
+            steps {
+                sh 'echo "Build running on agent at: $(date)"'
+                sh 'mkdir -p workspace-test && touch workspace-test/build-${BUILD_NUMBER}.txt'
+                sh 'ls -la workspace-test/'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Build ${BUILD_NUMBER} completed on agent: ${env.NODE_NAME}"
+            cleanWs()
+        }
+        success {
+            echo "SUCCESS — Agent is properly configured"
+        }
+        failure {
+            echo "FAILURE — Check agent connectivity in Manage Jenkins → Nodes"
+        }
+    }
+}
